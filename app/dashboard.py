@@ -7,7 +7,7 @@ from app.environmental_data import EnvironmentalDataAnalyzer
 st.set_page_config(page_title="Okavango Dashboard", layout="wide")
 st.title("Project Okavango: Environmental Dashboard 🌍")
 
-# Loading the Data Engine (with caching so it only downloads once)
+# Loading the Data Engine (With caching so it only downloads once)
 @st.cache_resource
 def load_data():
     engine = EnvironmentalDataAnalyzer(data_dir="downloads")
@@ -199,4 +199,5 @@ else:
             ax.set_ylabel("Weighted Average Coverage (%)")
             ax.set_title("Area-Weighted Mountain Protection by Continent")   
         st.pyplot(fig)
+
 
