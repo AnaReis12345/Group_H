@@ -10,7 +10,7 @@ st.title("Project Okavango: Environmental Dashboard 🌍")
 # Loading the Data Engine (With caching so it only downloads once)
 @st.cache_resource
 def load_data():
-    engine = EnvironmentalDataAnalyzer(data_dir="downloads")
+    engine = EnvironmentalDataAnalyzer()
     return engine
 
 data_engine = load_data()
@@ -28,16 +28,24 @@ dataset_options = {
 choice_label = st.selectbox("Choose a dataset to view:", list(dataset_options.keys()))
 chosen_filename = dataset_options[choice_label]
 
-# Preparing and cleaning most recent data
-world_map = data_engine.world_map
-raw_data = data_engine.datasets[chosen_filename]
-year_col = 'Year' if 'Year' in raw_data.columns else 'year'
-code_col = 'Code' if 'Code' in raw_data.columns else 'code'
-latest_data = raw_data.sort_values(year_col).groupby(code_col).tail(1)
+# Access merged data from class
+merged_map = data_engine.merged_data[chosen_filename]
+year_col = 'Year' if 'Year' in merged_map.columns else 'year'
+latest_year = merged_map[year_col].max()
+merged_map = merged_map[merged_map[year_col] == latest_year]
+data_column = data_engine.datasets[chosen_filename].columns[-1]
+
+## Preparing and cleaning most recent data
+#world_map = data_engine.world_map
+#raw_data = data_engine.datasets[chosen_filename]
+#year_col = 'Year' if 'Year' in raw_data.columns else 'year'
+#code_col = 'Code' if 'Code' in raw_data.columns else 'code'
+#latest_data = raw_data.sort_values(year_col).groupby(code_col).tail(1)
 
 # Merging the map and the data together
-merged_map = world_map.merge(latest_data, left_on="ISO_A3_EH", right_on=code_col, how="left")
-data_column = latest_data.columns[-1]
+#merged_map = world_map.merge(latest_data, left_on="ISO_A3_EH", right_on=code_col, how="left")
+#data_column = latest_data.columns[-1]
+
 st.write(f"### World Map: {choice_label}")
 fig_map, ax_map = plt.subplots(figsize=(15, 8))
 
