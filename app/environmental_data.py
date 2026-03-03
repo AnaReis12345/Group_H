@@ -1,39 +1,32 @@
+import os
 import geopandas as gpd
 import pandas as pd
-import os
 
 from app.data_downloader import datasets_download
 from app.data_merger import merge_map_with_datasets
 
 
 class EnvironmentalDataAnalyzer:
+    """Handles downloading, loading, and merging of environmental datasets with a world map."""
 
-    def __init__(self, data_dir = "downloads"):
-
+    def __init__(self, data_dir: str = "downloads") -> None:
         self.data_dir = data_dir
-        self.world_map = None
-        self.datasets = {}
-        self.merged_data = {}
-        
-        # Execute Function 1
-        datasets_download(self.data_dir)
-        
-        # Execute Function 2
-        map_path = os.path.join(self.data_dir, "ne_110m_admin_0_countries.zip")
-        merge_map_with_datasets(map_path, self.data_dir)
-        
-        # Read datasets into dataframes
-        self._read_dataframes()
-    
-    def _read_dataframes(self):
+        self.world_map: gpd.GeoDataFrame | None = None
+        self.datasets: dict[str, pd.DataFrame] = {}
+        self.merged_data: dict[str, gpd.GeoDataFrame] = {}
 
-        # Read map
+        datasets_download(self.data_dir)
+        self._read_dataframes()
+        self.merged_data = merge_map_with_datasets(self.world_map, self.datasets)
+
+    def _read_dataframes(self) -> None:
+        """Read the downloaded map and CSV files into class attributes."""
         map_path = os.path.join(self.data_dir, "ne_110m_admin_0_countries.zip")
         self.world_map = gpd.read_file(map_path)
-        
-        # Read CSV files
+
         for filename in os.listdir(self.data_dir):
-            if filename.endswith('.csv'):
+            if filename.endswith(".csv"):
                 filepath = os.path.join(self.data_dir, filename)
-                dataset_name = filename.replace('.csv', '')
-                self.datasets[dataset_name] = pd.read_csv(filepath)
+                name = filename.replace(".csv", "")
+                self.datasets[name] = pd.read_csv(filepath)
+                print(f"Loaded dataset: {name}")

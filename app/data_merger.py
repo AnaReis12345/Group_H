@@ -1,30 +1,18 @@
 import geopandas as gpd
 import pandas as pd
-import os
 
 
-def merge_map_with_datasets(map_path, datasets_dir):
+def merge_map_with_datasets(world_map: gpd.GeoDataFrame, datasets: dict[str, pd.DataFrame]) -> dict[str, gpd.GeoDataFrame]:
+    """Merge the world map GeoDataFrame with each dataset. Returns a dict of GeoDataFrames."""
+    merged_data = {}
 
-    print("P2: Merging map with datasets")
-    
-    # Load map 
-    world = gpd.read_file(map_path)
-    
-    # Find all CSV datasets
-    csv_files = [f for f in os.listdir(datasets_dir) if f.endswith('.csv')]
-    
-    # Merge each dataset with map
-    for csv_file in csv_files:
-        csv_path = os.path.join(datasets_dir, csv_file)
-        df = pd.read_csv(csv_path)
-        
-        
-        # Left dataframe is geopandas dataframe
-        merged = world.merge(
+    for name, df in datasets.items():
+        merged_data[name] = world_map.merge(
             df,
             left_on="ISO_A3_EH",
             right_on="code",
             how="left"
         )
-        
-        print(f"Merged shape: {merged.shape}")
+        print(f"Merged: {name} — shape: {merged_data[name].shape}")
+
+    return merged_data
