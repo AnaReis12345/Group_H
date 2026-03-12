@@ -1,0 +1,11 @@
+vision_model:
+  name: "llava" # Modelo para descrever imagens
+  prompt: "Analyze this satellite image. Identify any signs of deforestation, illegal logging, or human infrastructure in forest areas."
+
+text_analysis:
+  name: "llama3" # Modelo para avaliar o risco
+  prompt: "Based on the provided description, is there a significant environmental danger? Answer only 'Y' or 'N' and justify."
+
+image_settings:
+  zoom: 17
+  size: "600x600"
