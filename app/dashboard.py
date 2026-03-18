@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 from app.environmental_data import EnvironmentalDataAnalyzer
-git status
 
 # Page Setup
 st.set_page_config(page_title="Okavango Dashboard", layout="wide")
