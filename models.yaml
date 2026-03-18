@@ -1,10 +1,14 @@
 vision_model:
-  name: "llava" # Modelo para descrever imagens
-  prompt: "Analyze this satellite image. Identify any signs of deforestation, illegal logging, or human infrastructure in forest areas."
+  name: "llava"
+  prompt: "Analyze this satellite image. Identify any signs of deforestation, illegal logging, or human environmental impact. Describe what you see in detail."
+  temperature: 0.5
+  max_tokens: 500
 
 text_analysis:
-  name: "llama3" # Modelo para avaliar o risco
-  prompt: "Based on the provided description, is there a significant environmental danger? Answer only 'Y' or 'N' and justify."
+  name: "llama3"
+  prompt: "Based on the provided description, is there a significant environmental danger? Answer only with Y (yes) or N (no) followed by a brief explanation."
+  temperature: 0.3
+  max_tokens: 200
 
 image_settings:
   zoom: 17
