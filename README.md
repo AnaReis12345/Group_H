@@ -1,9 +1,9 @@
 # Group_H
 ## Team Members
-Ana Reis - 70047@novasbe.pt
-Duarte Maria Carvalho - 59479@novasbe.pt
-Kaltoum El Glaoui Hamdellah - 73174@novasbe.pt
-Gabriel Vieira - 52736@novasbe.pt
+70047 Ana Reis - 70047@novasbe.pt
+59479 Duarte Maria Carvalho - 59479@novasbe.pt
+73174 Kaltoum El Glaoui Hamdellah - 73174@novasbe.pt
+52736 Gabriel Vieira - 52736@novasbe.pt
 
 ## Installation and Setup
 

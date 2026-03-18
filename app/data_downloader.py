@@ -33,6 +33,12 @@ def datasets_download(download_dir: str) -> None:
 
     for url, filename in zip(dataset_urls, filenames):
         filepath = os.path.join(download_dir, filename)
+
+        # ── SKIP if file already exists ──
+        if os.path.exists(filepath):
+            print(f"Already exists, skipping: {filename}")
+            continue
+
         try:
             df = pd.read_csv(url, storage_options={"User-Agent": "Our World In Data data fetch/1.0"})
             if filename in column_renames:
@@ -42,8 +48,14 @@ def datasets_download(download_dir: str) -> None:
         except Exception as e:
             print(f"Error downloading {filename}: {e}")
 
-    map_url = "https://naturalearth.s3.amazonaws.com/110m_cultural/ne_110m_admin_0_countries.zip"
     map_path = os.path.join(download_dir, "ne_110m_admin_0_countries.zip")
+
+    # ── SKIP if map already exists ──
+    if os.path.exists(map_path):
+        print("World map already exists, skipping.")
+        return
+
+    map_url = "https://naturalearth.s3.amazonaws.com/110m_cultural/ne_110m_admin_0_countries.zip"
     response = requests.get(map_url)
     with open(map_path, "wb") as f:
         f.write(response.content)
