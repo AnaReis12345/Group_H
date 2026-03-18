@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+app/data_download.py
+app/data_merge.py
+app/environmental_data_backup.py
+tests/test_data_download.py
+tests/test_data_merge.py
