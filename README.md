@@ -48,12 +48,12 @@ This project directly supports three of the United Nations Sustainable Developme
 
 ### Example 1 — Deforested Amazon, Brazil (-9.1654, -62.8543)
 ![Example 1](images/example1.png)
-The AI identified illegal logging activity and burned land, flagging the area as AT RISK.
+The AI identified a large cleared patch with visible stumps and reddish-brown burned areas, contrasting sharply with the surrounding dense forest. Signs of illegal logging activity were detected, flagging the area as **AT RISK** due to significant environmental damage, potential wildfires, loss of biodiversity, and increased greenhouse gas emissions.
 
 ### Example 2 — Rondônia, Brazil (-11.0000, -62.0000)
 ![Example 2](images/example2.png)
-The AI detected significant land transformation and bare earth patches indicating deforestation, flagging the area as AT RISK.
+The AI detected a large patch of bare earth surrounded by green vegetation, suggesting active deforestation or recent land use change. Darker patches within the greener areas indicated possible illegal logging. The area was flagged as **AT RISK** due to threats to biodiversity, soil erosion, and land degradation.
 
 ### Example 3 — Madre de Dios, Peru (-12.5000, -70.0000)
 ![Example 3](images/example3.png)
-The AI identified forest fragmentation and systematic clearing consistent with illegal logging or mining, flagging the area as AT RISK.
+The AI identified significant forest clearing in the middle section of the image, with large areas replaced by non-forest cover suggesting agricultural use or infrastructure development. Forest fragmentation and systematic clearing patterns were detected, flagging the area as **AT RISK** due to habitat loss, increased risk of soil erosion,and negative impacts on local ecosystems and biodiversity.
