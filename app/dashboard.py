@@ -31,9 +31,23 @@ chosen_filename = dataset_options[choice_label]
 # Access merged data from class
 merged_map = data_engine.merged_data[chosen_filename]
 year_col = 'Year' if 'Year' in merged_map.columns else 'year'
+
+if year_col not in merged_map.columns:
+    st.error(f"Column '{year_col}' not found in dataset {chosen_filename}")
+    st.stop()
+
 latest_year = merged_map[year_col].max()
+
+if pd.isna(latest_year):
+    st.error(f"No valid year found in dataset {chosen_filename}")
+    st.stop()
+
 merged_map = merged_map[merged_map[year_col] == latest_year]
 data_column = data_engine.datasets[chosen_filename].columns[-1]
+
+if data_column not in merged_map.columns:
+    st.error(f"Column '{data_column}' not found in merged map")
+    st.stop()
 
 ## Preparing and cleaning most recent data
 #world_map = data_engine.world_map
